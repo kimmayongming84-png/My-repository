@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module — Company Culture</title>
+  <style>
+    :root { --navy: #1B3A6B; --blue-light: #E8F0FA; --blue-mid: #2A5298; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; background: #fff;
+           max-width: 780px; margin: 0 auto; padding: 32px 24px 60px; line-height: 1.7; font-size: 16px; }
+    .module-label { color: var(--navy); font-size: 13px; font-weight: 700; text-transform: uppercase;
+                    letter-spacing: 1.5px; margin-bottom: 6px; }
+    h1 { font-size: 28px; font-weight: 800; margin: 0 0 8px; color: #111; }
+    h2 { font-size: 17px; font-weight: 700; color: var(--navy); margin: 36px 0 12px;
+         text-transform: uppercase; letter-spacing: 0.5px; }
+    .intro { color: #444; margin: 12px 0 28px; font-size: 15px; }
+    hr { border: none; border-top: 2px solid #f0f0f0; margin: 30px 0; }
+
+    /* Hero banner */
+    .culture-hero { background: var(--navy); border-radius: 10px; padding: 36px 32px; margin-bottom: 32px; text-align: center; }
+    .culture-hero h2 { color: #fff; margin: 0 0 8px; font-size: 22px; letter-spacing: 1px; }
+    .culture-hero p { color: rgba(255,255,255,0.8); font-size: 15px; margin: 0; max-width: 540px; margin: 0 auto; }
+
+    /* Pillars */
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0 32px; }
+    .pillar { background: var(--blue-light); border-radius: 8px; padding: 18px 16px; text-align: center; }
+    .pillar .icon { font-size: 26px; margin-bottom: 8px; }
+    .pillar .ptitle { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .pillar .pdesc { font-size: 12px; color: #555; line-height: 1.5; }
+
+    /* Screenshot placeholder */
+    .photo-placeholder { border: 2px dashed #CBD5E8; border-radius: 10px; background: #F7FAFF;
+                         padding: 32px 24px; text-align: center; margin: 16px 0; }
+    .photo-placeholder .ph-icon { font-size: 32px; margin-bottom: 8px; }
+    .photo-placeholder .ph-label { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+    .photo-placeholder .ph-hint { font-size: 12px; color: #888; }
+
+    /* Photo grid (2-col) */
+    .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0 28px; }
+
+    /* Celebration cards */
+    .celebration-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0 28px; }
+    .celebration-card { border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; }
+    .celebration-card .cc-header { padding: 12px 14px; }
+    .celebration-card .cc-header.bday  { background: #FFF3E0; border-bottom: 3px solid #F59E0B; }
+    .celebration-card .cc-header.win   { background: #E8F5E9; border-bottom: 3px solid #34A853; }
+    .celebration-card .cc-header.newhire { background: var(--blue-light); border-bottom: 3px solid var(--navy); }
+    .celebration-card .cc-icon { font-size: 22px; margin-bottom: 4px; }
+    .celebration-card .cc-title { font-size: 13px; font-weight: 700; color: #333; }
+    .cc-placeholder { padding: 14px; background: #fafafa; }
+    .cc-placeholder .ph-label { font-size: 12px; font-weight: 700; color: #888; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .cc-placeholder .ph-hint { font-size: 11px; color: #aaa; }
+    .screenshot-box { border: 2px dashed #CBD5E8; border-radius: 6px; background: #F7FAFF;
+                      padding: 20px 12px; text-align: center; margin: 6px 0; }
+    .screenshot-box .sb-icon { font-size: 20px; margin-bottom: 4px; }
+    .screenshot-box .sb-text { font-size: 11px; color: #888; }
+
+    /* Perks */
+    .perks-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 28px; }
+    .perk-item { display: flex; align-items: flex-start; gap: 12px; background: #fafafa;
+                 border: 1px solid #f0f0f0; border-radius: 8px; padding: 14px; }
+    .perk-icon { font-size: 22px; min-width: 30px; }
+    .perk-text strong { display: block; font-size: 14px; color: #111; margin-bottom: 2px; }
+    .perk-text span { font-size: 12px; color: #666; }
+
+    /* Quote */
+    .culture-quote { border-left: 4px solid var(--navy); padding: 16px 20px; background: var(--blue-light);
+                     border-radius: 0 8px 8px 0; margin: 24px 0; font-style: italic; font-size: 15px; color: #333; }
+
+    .completion-note { text-align: center; background: #f9f9f9; border: 2px dashed #ddd;
+                       border-radius: 8px; padding: 22px 24px; margin-top: 36px; }
+    .completion-note p { margin: 0; color: #555; font-size: 14px; }
+
+    @media (max-width: 600px) {
+      .pillars-grid, .celebration-row, .perks-list { grid-template-columns: 1fr; }
+      .photo-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="module-label">Company Culture</div>
+  <h1>Welcome to the BIA Family</h1>
+  <p class="intro">BIA isn't just a company — it's a community of people who genuinely enjoy working together. This module gives you a feel for what that actually looks like day to day. Culture isn't in a handbook. It shows up in game nights, birthday shoutouts, celebrating team wins, and how we treat each other when no one's watching.</p>
+
+  <!-- HERO -->
+  <div class="culture-hero">
+    <h2>🏡 Real People. Real Results. Real Fun.</h2>
+    <p>We work hard, we celebrate hard, and we genuinely care about the people on this team. Here's a look at what you're walking into.</p>
+  </div>
+
+  <!-- PILLARS -->
+  <h2>How We Show Up</h2>
+  <div class="pillars-grid">
+    <div class="pillar">
+      <div class="icon">🤝</div>
+      <div class="ptitle">We Celebrate Each Other</div>
+      <div class="pdesc">Wins — big and small — get recognized publicly. Your teammates will cheer for you.</div>
+    </div>
+    <div class="pillar">
+      <div class="icon">🎉</div>
+      <div class="ptitle">We Have Fun Together</div>
+      <div class="pdesc">Game nights, team events, and celebrations are part of how we build real connections.</div>
+    </div>
+    <div class="pillar">
+      <div class="icon">📈</div>
+      <div class="ptitle">We Grow Together</div>
+      <div class="pdesc">Everyone's growth matters here. We invest in each other's success, not just the bottom line.</div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <!-- TEAM EVENTS -->
+  <h2>Team Events & Game Nights</h2>
+  <p style="font-size:15px; color:#555; margin-top:-8px; margin-bottom:16px;">Here's a glimpse of the team outside of work hours. These aren't mandatory — but once you've been to one, you'll keep showing up.</p>
+
+  <div class="photo-grid">
+    <div class="photo-placeholder">
+      <div class="ph-icon">📸</div>
+      <div class="ph-label">Team Event Photo 1</div>
+      <div class="ph-hint">Add screenshot or photo here</div>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon">📸</div>
+      <div class="ph-label">Team Event Photo 2</div>
+      <div class="ph-hint">Add screenshot or photo here</div>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon">🎮</div>
+      <div class="ph-label">Game Night Screenshot</div>
+      <div class="ph-hint">Add screenshot from Slack / event</div>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon">🎮</div>
+      <div class="ph-label">Game Night Screenshot 2</div>
+      <div class="ph-hint">Add screenshot from Slack / event</div>
+    </div>
+  </div>
+
+  <div class="culture-quote">
+    "We built this team to be the kind of place people actually want to show up to — not because they have to, but because the work is meaningful and the people make it worth it."
+  </div>
+
+  <hr/>
+
+  <!-- CELEBRATIONS ON TEAM HUB -->
+  <h2>How We Celebrate on #team-hub</h2>
+  <p style="font-size:15px; color:#555; margin-top:-8px; margin-bottom:16px;">Every milestone — from a new hire joining to a birthday to a student win — gets recognized in the #team-hub Slack channel. These aren't just posts. They're how we stay human with each other across a remote team.</p>
+
+  <div class="celebration-row">
+
+    <div class="celebration-card">
+      <div class="cc-header bday">
+        <div class="cc-icon">🎂</div>
+        <div class="cc-title">Birthday Shoutouts</div>
+      </div>
+      <div class="cc-placeholder">
+        <div class="ph-label">Screenshot</div>
+        <div class="screenshot-box">
+          <div class="sb-icon">📱</div>
+          <div class="sb-text">Add #team-hub birthday post screenshot</div>
+        </div>
+        <div class="ph-hint" style="margin-top:8px; font-size:11px; color:#888;">HR posts every birthday in the channel. Drop a birthday message when you see one — it takes 5 seconds and means a lot.</div>
+      </div>
+    </div>
+
+    <div class="celebration-card">
+      <div class="cc-header win">
+        <div class="cc-icon">🏆</div>
+        <div class="cc-title">Student & Team Wins</div>
+      </div>
+      <div class="cc-placeholder">
+        <div class="ph-label">Screenshot</div>
+        <div class="screenshot-box">
+          <div class="sb-icon">📱</div>
+          <div class="sb-text">Add student wins / team wins post screenshot</div>
+        </div>
+        <div class="ph-hint" style="margin-top:8px; font-size:11px; color:#888;">When a student closes their first deal, hits a goal, or shares a breakthrough — it goes in #student-wins. Tag your team member when they crush it.</div>
+      </div>
+    </div>
+
+    <div class="celebration-card">
+      <div class="cc-header newhire">
+        <div class="cc-icon">👋</div>
+        <div class="cc-title">New Hire Welcome</div>
+      </div>
+      <div class="cc-placeholder">
+        <div class="ph-label">Screenshot</div>
+        <div class="screenshot-box">
+          <div class="sb-icon">📱</div>
+          <div class="sb-text">Add new hire welcome post screenshot</div>
+        </div>
+        <div class="ph-hint" style="margin-top:8px; font-size:11px; color:#888;">Every new team member gets a welcome post. When you see a new hire announced, drop a welcome message. That's your first culture contribution.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr/>
+
+  <!-- PERKS -->
+  <h2>Perks of Being on the Team</h2>
+
+  <div class="perks-list">
+    <div class="perk-item">
+      <div class="perk-icon">🏡</div>
+      <div class="perk-text">
+        <strong>Fully Remote Work</strong>
+        <span>Work from anywhere. You manage your schedule and your results.</span>
+      </div>
+    </div>
+    <div class="perk-item">
+      <div class="perk-icon">🎓</div>
+      <div class="perk-text">
+        <strong>Access to BIA Education</strong>
+        <span>As a team member, you're immersed in real estate investing knowledge daily. That education has real value.</span>
+      </div>
+    </div>
+    <div class="perk-item">
+      <div class="perk-icon">💸</div>
+      <div class="perk-text">
+        <strong>Commission-Based Earning Potential</strong>
+        <span>Your income grows with your performance. No cap on what you can build.</span>
+      </div>
+    </div>
+    <div class="perk-item">
+      <div class="perk-icon">🤜</div>
+      <div class="perk-text">
+        <strong>A Team That Shows Up</strong>
+        <span>You're not doing this alone. The team celebrates your wins and supports you when things are hard.</span>
+      </div>
+    </div>
+    <div class="perk-item">
+      <div class="perk-icon">🎮</div>
+      <div class="perk-text">
+        <strong>Team Game Nights & Events</strong>
+        <span>Regular team socials — because great culture doesn't happen by accident.</span>
+      </div>
+    </div>
+    <div class="perk-item">
+      <div class="perk-icon">📣</div>
+      <div class="perk-text">
+        <strong>[ADD YOUR OWN PERK]</strong>
+        <span>Add any additional perks specific to BIA here before publishing.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="completion-note">
+    <p>✅ &nbsp;<strong>Now you know what BIA is made of.</strong><br/>
+    Hit <strong>Mark as Complete</strong> and keep going — you're almost through onboarding.</p>
+  </div>
+
+</body>
+</html>
