@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module — Facebook Groups</title>
+  <style>
+    :root { --navy: #1B3A6B; --blue-light: #E8F0FA; --blue-mid: #2A5298; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; background: #fff;
+           max-width: 780px; margin: 0 auto; padding: 32px 24px 60px; line-height: 1.7; font-size: 16px; }
+    .module-label { color: var(--navy); font-size: 13px; font-weight: 700; text-transform: uppercase;
+                    letter-spacing: 1.5px; margin-bottom: 6px; }
+    h1 { font-size: 28px; font-weight: 800; margin: 0 0 8px; color: #111; }
+    h2 { font-size: 17px; font-weight: 700; color: var(--navy); margin: 36px 0 12px;
+         text-transform: uppercase; letter-spacing: 0.5px; }
+    .intro { color: #444; margin: 12px 0 28px; font-size: 15px; }
+    hr { border: none; border-top: 2px solid #f0f0f0; margin: 30px 0; }
+
+    /* Action callout */
+    .callout-action { background: var(--blue-light); border-left: 5px solid var(--navy);
+                      border-radius: 6px; padding: 18px 22px; margin: 24px 0; }
+    .callout-action .ca-title { font-size: 13px; font-weight: 700; color: var(--navy);
+                                 text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+    .callout-action p { margin: 0; font-size: 15px; color: #333; }
+
+    /* Group cards */
+    .groups-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0 32px; }
+    .group-card { border-radius: 10px; overflow: hidden; border: 1px solid #e0e0e0; }
+    .group-card-header { padding: 20px 20px 14px; }
+    .group-card-header.public  { background: var(--navy); }
+    .group-card-header.private { background: var(--blue-mid); }
+    .group-card-header .gtag { font-size: 11px; font-weight: 700; text-transform: uppercase;
+                                letter-spacing: 1.2px; color: rgba(255,255,255,0.65); margin-bottom: 4px; }
+    .group-card-header .gtitle { font-size: 18px; font-weight: 800; color: #fff; }
+    .group-card-header .gmembers { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+    .group-card-body { padding: 18px 20px; background: #fafafa; }
+    .group-card-body .gdesc { font-size: 14px; color: #444; line-height: 1.6; margin: 0 0 12px; }
+    .group-card-body .grole { font-size: 12px; font-weight: 700; color: var(--navy);
+                               text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .tag { font-size: 11px; background: var(--navy); color: #fff; border-radius: 3px;
+           padding: 3px 8px; font-weight: 600; }
+    .tag.blue { background: var(--blue-mid); }
+    .group-link-btn { display: block; text-align: center; padding: 10px 14px;
+                      background: var(--navy); color: #fff; border-radius: 5px; font-size: 13px;
+                      font-weight: 700; text-decoration: none; letter-spacing: 0.3px; }
+    .group-link-btn.alt { background: var(--blue-mid); }
+
+    /* Etiquette rules */
+    .rule-list { margin: 12px 0; }
+    .rule-item { display: flex; gap: 14px; align-items: flex-start; padding: 10px 14px;
+                 background: #fafafa; border: 1px solid #f0f0f0; border-radius: 6px; margin-bottom: 8px; }
+    .rule-num { min-width: 28px; height: 28px; background: var(--navy); color: #fff;
+                border-radius: 50%; font-size: 12px; font-weight: 700; display: flex;
+                align-items: center; justify-content: center; margin-top: 1px; }
+    .rule-text strong { display: block; font-size: 15px; color: #111; }
+    .rule-text span { font-size: 13px; color: #666; }
+
+    /* Photo placeholder inside card */
+    .card-photo { border: 2px dashed #CBD5E8; border-radius: 6px; background: #F0F5FF;
+                  padding: 22px 12px; text-align: center; margin-bottom: 14px; }
+    .card-photo .cp-icon { font-size: 24px; margin-bottom: 4px; }
+    .card-photo .cp-text { font-size: 11px; color: #7A93C0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Approval box */
+    .approval-box { background: #fff; border: 1px solid #CBD5E8; border-radius: 6px;
+                    padding: 10px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .approval-box .ab-icon { font-size: 18px; }
+    .approval-box .ab-text { font-size: 13px; color: #333; }
+    .approval-box .ab-text strong { color: var(--navy); }
+
+    .completion-note { text-align: center; background: #f9f9f9; border: 2px dashed #ddd;
+                       border-radius: 8px; padding: 22px 24px; margin-top: 36px; }
+    .completion-note p { margin: 0; color: #555; font-size: 14px; }
+
+    @media (max-width: 600px) { .groups-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="module-label">Facebook Groups</div>
+  <h1>Join Both BIA Facebook Groups</h1>
+  <p class="intro">BIA operates two Facebook groups that serve different purposes — one faces the outside world, one is just for students. As part of the team, you need to be in both. This lesson tells you what each one is for and what's expected of you in them.</p>
+
+  <div class="callout-action">
+    <div class="ca-title">✅ Action Required</div>
+    <p>You must join both groups before completing this module. Click the links below to request access. <strong>Ping Jhoanna (HR)</strong> on Slack to get approved for the Public Group, and <strong>ping Megan Sorenson</strong> on Slack to get approved for the Members Group.</p>
+  </div>
+
+  <hr/>
+
+  <h2>The Two Groups</h2>
+
+  <div class="groups-grid">
+
+    <!-- PUBLIC -->
+    <div class="group-card">
+      <div class="group-card-header public">
+        <div class="gtag">🌐 Public Group</div>
+        <div class="gtitle">BIA Public Community</div>
+        <div class="gmembers">300K Members &amp; Growing</div>
+      </div>
+      <div class="group-card-body">
+        <div class="card-photo">
+          <div class="cp-icon">📸</div>
+          <div class="cp-text">Add Public Group Screenshot Here</div>
+        </div>
+        <div class="grole">Purpose</div>
+        <p class="gdesc">This is BIA's largest community and one of the primary channels for lead generation. We use this group to educate the public on real estate investing, share wins, and build trust with people who haven't joined the program yet.</p>
+        <div class="tag-list">
+          <span class="tag">Lead Generation</span>
+          <span class="tag">Education</span>
+          <span class="tag">Public Facing</span>
+        </div>
+        <div class="approval-box">
+          <div class="ab-icon">💬</div>
+          <div class="ab-text">Ping <strong>Jhoanna</strong> on Slack to approve your request to join this group.</div>
+        </div>
+        <a href="[INSERT PUBLIC GROUP LINK]" target="_blank" class="group-link-btn">Join Public Group ↗</a>
+      </div>
+    </div>
+
+    <!-- PRIVATE -->
+    <div class="group-card">
+      <div class="group-card-header private">
+        <div class="gtag">🔒 Private Group</div>
+        <div class="gtitle">BIA Members Only</div>
+        <div class="gmembers">3,700+ Members & Growing</div>
+      </div>
+      <div class="group-card-body">
+        <div class="card-photo">
+          <div class="cp-icon">📸</div>
+          <div class="cp-text">Add Members Group Screenshot Here</div>
+        </div>
+        <div class="grole">Purpose</div>
+        <p class="gdesc">This is the student community. Only enrolled members are added here. This is where students connect, share wins, ask questions, and stay engaged with the BIA program. The energy in this group directly reflects the experience we're delivering.</p>
+        <div class="tag-list">
+          <span class="tag blue">Students Only</span>
+          <span class="tag blue">Community</span>
+          <span class="tag blue">Engagement</span>
+        </div>
+        <div class="approval-box">
+          <div class="ab-icon">💬</div>
+          <div class="ab-text">Ping <strong>Megan Sorenson</strong> on Slack to approve your request to join this group.</div>
+        </div>
+        <a href="[INSERT PRIVATE GROUP LINK]" target="_blank" class="group-link-btn alt">Join Members Group ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <hr/>
+
+  <h2>Your Role in These Groups</h2>
+  <p style="font-size:15px; color:#555; margin-top:-8px; margin-bottom:16px;">Being a member isn't passive. Here's how you're expected to show up in both groups.</p>
+
+  <div class="rule-list">
+    <div class="rule-item">
+      <div class="rule-num">1</div>
+      <div class="rule-text">
+        <strong>Be present in the Members group</strong>
+        <span>Like posts, comment on wins, answer questions within your scope. Your engagement signals to students that the team is active and invested in them.</span>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">2</div>
+      <div class="rule-text">
+        <strong>Keep the Public group professional</strong>
+        <span>This is the face of BIA to the outside world. Nothing negative, no internal discussions, and never discuss pricing or specific program details publicly.</span>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">3</div>
+      <div class="rule-text">
+        <strong>Don't share confidential info in either group</strong>
+        <span>Internal SOPs, team decisions, student account details — none of that goes in Facebook. Ever.</span>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">4</div>
+      <div class="rule-text">
+        <strong>Report problems through the right channel</strong>
+        <span>If you see a problematic post, inappropriate comment, or a student in distress — notify your manager via Slack. Don't handle it publicly in the group.</span>
+      </div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">5</div>
+      <div class="rule-text">
+        <strong>Your personal profile is your brand</strong>
+        <span>You're representing BIA when you engage in these groups. Keep your profile professional and your interactions consistent with our values.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="completion-note">
+    <p>✅ &nbsp;<strong>Joined both groups? Good.</strong><br/>
+    Hit <strong>Mark as Complete</strong> and move to the next module.</p>
+  </div>
+
+</body>
+</html>
